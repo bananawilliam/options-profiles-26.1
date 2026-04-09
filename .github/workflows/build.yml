@@ -14,6 +14,12 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
 
+      # THIS IS THE FIX: Downloads the missing engine file automatically
+      - name: Download Gradle Wrapper Jar
+        run: |
+          mkdir -p gradle/wrapper
+          curl -L https://raw.githubusercontent.com/gradle/gradle/v9.3.0/gradle/wrapper/gradle-wrapper.jar -o gradle/wrapper/gradle-wrapper.jar
+
       - name: Grant Execute Permission
         run: chmod +x gradlew
 
