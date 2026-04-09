@@ -1,21 +1,25 @@
 plugins {
-    // Note: The ID is now just 'net.fabricmc.loom'
-    id 'net.fabricmc.loom' version '1.15-SNAPSHOT'
+    // This is the new 2026 plugin for Tiny Takeover
+    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
 }
 
-version = "1.0.0"
+version = "1.4.4-26.1"
 group = "net.trafficlunar.optionsprofiles"
 
 dependencies {
-    // 26.1 Tiny Takeover official release
+    // Target the new 26.1 release
     minecraft "com.mojang:minecraft:26.1"
     
-    // NO 'mappings' line is needed! 26.1 is unobfuscated.
+    // IMPORTANT: No mappings line! 26.1 is already readable.
     
     modImplementation "net.fabricmc:fabric-loader:0.18.9"
 }
 
 java {
-    // Java 25 is required for 2026 versions
+    // 26.1 will not run without Java 25
     toolchain.languageVersion = JavaLanguageVersion.of(25)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 25
 }
