@@ -3,7 +3,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
+    steps:- name: Grant Execute Permission
+        run: chmod +x gradlew
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Set up Java 25
