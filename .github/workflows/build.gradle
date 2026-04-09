@@ -1,25 +1,21 @@
 plugins {
-    // This is the new plugin ID for Minecraft 26.x+
-    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
+    // Note: The ID is now just 'net.fabricmc.loom'
+    id 'net.fabricmc.loom' version '1.15-SNAPSHOT'
 }
 
 version = "1.0.0"
 group = "net.trafficlunar.optionsprofiles"
 
 dependencies {
-    // 26.1 Tiny Takeover
+    // 26.1 Tiny Takeover official release
     minecraft "com.mojang:minecraft:26.1"
     
-    // We don't need 'mappings' anymore because 26.1 is unobfuscated!
-    // But we still need the loader.
+    // NO 'mappings' line is needed! 26.1 is unobfuscated.
+    
     modImplementation "net.fabricmc:fabric-loader:0.18.9"
 }
 
 java {
-    // Java 25 is required for 26.1
+    // Java 25 is required for 2026 versions
     toolchain.languageVersion = JavaLanguageVersion.of(25)
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 25
 }
