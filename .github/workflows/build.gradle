@@ -1,24 +1,22 @@
 plugins {
-    // Loom 1.15 is the only one that supports 26.1 properly right now
-    id 'net.fabricmc.loom' version '1.15-SNAPSHOT' 
+    // This is the new plugin ID for Minecraft 26.x+
+    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
 }
 
 version = "1.0.0"
 group = "net.trafficlunar.optionsprofiles"
 
 dependencies {
-    // Official 26.1 Tiny Takeover release
+    // 26.1 Tiny Takeover
     minecraft "com.mojang:minecraft:26.1"
     
-    // 26.1 uses Official Mojang Mappings by default!
-    mappings loom.officialMojangMappings() 
-    
-    // Use the absolutely latest loader for 26.1
+    // We don't need 'mappings' anymore because 26.1 is unobfuscated!
+    // But we still need the loader.
     modImplementation "net.fabricmc:fabric-loader:0.18.9"
 }
 
-// Java 25 is MANDATORY for 26.1
 java {
+    // Java 25 is required for 26.1
     toolchain.languageVersion = JavaLanguageVersion.of(25)
 }
 
