@@ -1,5 +1,5 @@
 plugins {
-    // This is the brand new 26.1 plugin
+    // 26.1 requires the new Loom version
     id 'net.fabricmc.loom' version '1.15-SNAPSHOT' 
 }
 
@@ -7,15 +7,16 @@ version = "1.0.0"
 group = "net.trafficlunar.optionsprofiles"
 
 dependencies {
-    // 26.1 is now officially supported!
+    // 26.1 is officially supported now!
     minecraft "com.mojang:minecraft:26.1"
+    
+    // We use Official Mappings for 26.1
     mappings loom.officialMojangMappings() 
     
-    // We use 'implementation' now, not 'modImplementation' for 26.1
-    implementation "net.fabricmc:fabric-loader:0.18.4"
+    modImplementation "net.fabricmc:fabric-loader:0.18.4"
 }
 
-// 26.1 REQUIRES Java 25
+// 26.1 REQUIRES Java 25 to run and build
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(25)
 }
