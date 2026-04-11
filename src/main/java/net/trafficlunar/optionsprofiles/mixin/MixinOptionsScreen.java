@@ -1,5 +1,7 @@
 package net.trafficlunar.optionsprofiles.mixin;
 
+import net.trafficlunar.optionsprofiles.gui.ProfilesScreen; // The new import
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.network.chat.Component;
@@ -15,14 +17,12 @@ public class MixinOptionsScreen {
     private void addProfilesButton(CallbackInfo ci) {
         OptionsScreen screen = (OptionsScreen) (Object) this;
 
-        // In 26.1, we add buttons using the new Builder pattern.
-        // This puts the "Profiles" button in the bottom-left, safe from the new baby mob sliders.
+        // The button now correctly targets your new ProfilesScreen
         screen.addRenderableWidget(Button.builder(
             Component.translatable("optionsprofiles.menu.title"), 
             button -> {
-                // This connects to the Profiles Screen from your JAR
-                // Minecraft.getInstance().setScreen(new ProfilesScreen(screen));
-                System.out.println("Options Profiles: Menu Opened!");
+                // This line opens the screen we just created!
+                Minecraft.getInstance().setScreen(new ProfilesScreen(screen));
             })
             .dimensions(screen.width / 2 - 155, screen.height / 6 + 145, 150, 20)
             .build());
