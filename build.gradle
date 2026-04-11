@@ -1,0 +1,64 @@
+plugins {
+    id 'fabric-loom' version '1.7-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = "1.4.4"
+group = "net.trafficlunar"
+
+base {
+    // This is the CRITICAL line. It sets the filename for GitHub to find.
+    archivesName = "options-profiles"
+}
+
+repositories {
+    // Standard repositories for 26.1
+    maven { url = "https://maven.terraformersmc.com/" }
+    maven { url = "https://maven.parchmentmc.org" }
+}
+
+dependencies {
+    // Official 26.1 Mappings and Fabric Loader
+    minecraft "com.mojang:minecraft:26.1"
+    mappings "net.fabricmc:yarn:26.1+build.1:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.15.11"
+
+    // Fabric API (Required for Mixins and GUI)
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.97.0+26.1"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+def targetJavaVersion = 25
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        it.options.release.set(targetJavaVersion)
+    }
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}
+
+// Ensure the remapped JAR (the one you actually use) is what GitHub sees
+remapJar {
+    archiveClassifier = "" 
+}
