@@ -1,0 +1,8 @@
+{
+  "optionsprofiles.menu.title": "Options Profiles",
+  "optionsprofiles.button.save": "Save Current Settings",
+  "optionsprofiles.input.placeholder": "Enter Profile Name...",
+  "optionsprofiles.message.saved": "Profile '%s' saved successfully!",
+  "optionsprofiles.message.loaded": "Profile '%s' loaded!",
+  "gui.back": "Back"
+}
