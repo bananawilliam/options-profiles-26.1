@@ -1,9 +1,11 @@
 pluginManagement {
     repositories {
+        // Essential for the new 26.1 Loom plugin
         maven { url = "https://maven.fabricmc.net/" }
         mavenCentral()
         gradlePluginPortal()
     }
 }
 
+// This name will show up in your final .jar filename
 rootProject.name = "options-profiles"
